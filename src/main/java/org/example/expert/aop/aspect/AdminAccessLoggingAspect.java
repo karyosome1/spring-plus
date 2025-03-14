@@ -1,4 +1,4 @@
-package org.example.expert.aop;
+package org.example.expert.aop.aspect;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
