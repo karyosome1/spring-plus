@@ -42,7 +42,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(request -> request.getRequestURI().startsWith("/auth")).permitAll()
                         .requestMatchers("/test").authenticated()
-                        .requestMatchers("/open").permitAll()
+                        .requestMatchers(request -> request.getRequestURI().startsWith("/health")).permitAll()
+                        .requestMatchers(request -> request.getRequestURI().startsWith("/open")).permitAll()
                         .anyRequest().authenticated()
                 )
                 .build();
