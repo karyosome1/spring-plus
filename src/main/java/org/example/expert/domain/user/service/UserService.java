@@ -11,6 +11,7 @@ import org.example.expert.domain.user.dto.response.UserImageResponse;
 import org.example.expert.domain.user.dto.response.UserResponse;
 import org.example.expert.domain.user.entity.User;
 import org.example.expert.domain.user.repository.UserRepository;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -93,4 +95,10 @@ public class UserService {
             throw new ServerException("URL 디코딩 중 오류 발생: " + e.getMessage(), e);
         }
     }
+
+    @Cacheable(value = "userCache", key = "#nickname")
+    public List<User> findUsersByNickname(String nickname) {
+        return userRepository.findByNickname(nickname);
+    }
+
 }
