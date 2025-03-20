@@ -1,13 +1,13 @@
 package org.example.expert.domain.user.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.example.expert.domain.common.dto.AuthUser;
 import org.example.expert.domain.common.entity.Timestamped;
 import org.example.expert.domain.user.enums.UserRole;
 
 @Getter
+@Setter(AccessLevel.PROTECTED)
 @Entity
 @NoArgsConstructor
 @Table(name = "users")
@@ -21,12 +21,14 @@ public class User extends Timestamped {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
     private String nickname;
+    private String imageUrl;
 
     public User(String email, String password, UserRole userRole, String nickname) {
         this.email = email;
         this.password = password;
         this.userRole = userRole;
         this.nickname = nickname;
+        this.imageUrl = "default";
     }
 
     private User(Long id, String email, UserRole userRole, String nickname) {
@@ -47,4 +49,9 @@ public class User extends Timestamped {
     public void updateRole(UserRole userRole) {
         this.userRole = userRole;
     }
+
+    public void updateImage(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
 }

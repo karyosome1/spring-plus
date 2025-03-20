@@ -12,4 +12,5 @@ public class UserResponse {
         this.id = id;
         this.email = email;
     }
+
 }
